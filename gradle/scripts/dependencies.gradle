@@ -45,7 +45,7 @@ dependencies {
     runtimeOnly rfg.deobf('curse.maven:ftb-library-legacy-forge-237167:2985811')
     runtimeOnly rfg.deobf('curse.maven:ftb-utilities-forge-237102:3157548')
 
-    implementation 'com.cleanroommc:configanytime:1.0'
+//    implementation 'com.cleanroommc:configanytime:1.0'
 
     // To test the mod
 
