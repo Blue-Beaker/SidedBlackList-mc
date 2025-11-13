@@ -19,6 +19,8 @@ public class ConfigManager {
         try {
             old_config=config;
             config=gson.fromJson(new JsonReader(new FileReader(new File(Loader.instance().getConfigDir(),CONFIG_NAME))),SidedBlacklistConfig.class);
+            //Keep the comment
+            config._comment=SidedBlacklistConfig.COMMENT;
             replaceNullValues(config,old_config);
         } catch (FileNotFoundException e) {
             config=new SidedBlacklistConfig();
