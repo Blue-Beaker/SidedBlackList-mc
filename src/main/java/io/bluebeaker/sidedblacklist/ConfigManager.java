@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.Loader;
 
 import java.io.*;
 import java.lang.reflect.Field;
-import java.util.logging.Level;
 
 public class ConfigManager {
 
@@ -31,10 +30,10 @@ public class ConfigManager {
             try {
                 if(declaredField.get(config)==null){
                     declaredField.set(config,declaredField.get(defaults));
-                    SidedBlacklistMod.LOGGER.log(Level.WARNING,"Config value '"+declaredField.getName()+"' is null");
+                    SidedBlacklistMod.getLogger().warn("Config value '{}' is null", declaredField.getName());
                 }
             } catch (Exception e) {
-                SidedBlacklistMod.LOGGER.log(Level.SEVERE,"Exception reading config ",e);
+                SidedBlacklistMod.getLogger().error("Exception reading config ",e);
             }
         }
     }
@@ -46,7 +45,7 @@ public class ConfigManager {
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            SidedBlacklistMod.LOGGER.log(Level.SEVERE,"Exception writing config: ",e);
+            SidedBlacklistMod.getLogger().error("Exception writing config: ",e);
         }
     }
     public static void refresh(){

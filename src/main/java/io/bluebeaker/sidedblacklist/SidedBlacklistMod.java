@@ -5,8 +5,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Tags.MOD_ID, name = Tags.MOD_NAME, version = Tags.VERSION)
 public class SidedBlacklistMod
@@ -14,10 +14,11 @@ public class SidedBlacklistMod
     public static final String MODID = Tags.MOD_ID;
     public static final String NAME = Tags.MOD_NAME;
     public static final String VERSION = Tags.VERSION;
-    public static final Logger LOGGER = Logger.getLogger("SidedBlacklistMod");
 
     public MinecraftServer server;
-    
+
+    public static Logger logger = LogManager.getLogger(MODID);
+
     public SidedBlacklistMod() {
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -28,6 +29,6 @@ public class SidedBlacklistMod
     }
 
     public static Logger getLogger(){
-        return LOGGER;
+        return logger;
     }
 }

@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Arrays;
-import java.util.logging.Level;
 
 @Mixin(value = FMLModContainer.class,remap = false)
 public abstract class MixinModContainer {
@@ -25,7 +24,7 @@ public abstract class MixinModContainer {
 
         if((side==Side.CLIENT && Arrays.asList(ConfigManager.config.blacklist_client).contains(modId))
         || (side==Side.SERVER && Arrays.asList(ConfigManager.config.blacklist_server).contains(modId))){
-            SidedBlacklistMod.getLogger().log(Level.INFO,"Mod "+modId+" won't be loaded on "+side+" side because it's on the blacklist!");
+            SidedBlacklistMod.getLogger().info("Disabling mod '{}' blacklisted on the {} side", modId, side);
             cir.setReturnValue(false);
         }
     }
