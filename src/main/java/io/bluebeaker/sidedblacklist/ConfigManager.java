@@ -8,10 +8,8 @@ import net.minecraftforge.fml.common.Loader;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ConfigManager {
-    public static final Logger LOGGER = Logger.getLogger("SidedBlacklist");
 
     public static final String CONFIG_NAME = "sidedblacklist.json";
     public static SidedBlacklistConfig config = new SidedBlacklistConfig();
@@ -33,10 +31,10 @@ public class ConfigManager {
             try {
                 if(declaredField.get(config)==null){
                     declaredField.set(config,declaredField.get(defaults));
-                    LOGGER.log(Level.WARNING,"Config value '{}' is null",declaredField.getName());
+                    SidedBlacklistMod.LOGGER.log(Level.WARNING,"Config value '"+declaredField.getName()+"' is null");
                 }
             } catch (Exception e) {
-                LOGGER.log(Level.SEVERE,"Exception reading config ",e);
+                SidedBlacklistMod.LOGGER.log(Level.SEVERE,"Exception reading config ",e);
             }
         }
     }
@@ -48,7 +46,7 @@ public class ConfigManager {
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE,"Exception writing config: ",e);
+            SidedBlacklistMod.LOGGER.log(Level.SEVERE,"Exception writing config: ",e);
         }
     }
     public static void refresh(){
