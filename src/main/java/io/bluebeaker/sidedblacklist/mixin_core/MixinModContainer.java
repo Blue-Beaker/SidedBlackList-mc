@@ -1,0 +1,35 @@
+package io.bluebeaker.sidedblacklist.mixin_core;
+
+import io.bluebeaker.sidedblacklist.ConfigManager;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.FMLModContainer;
+import net.minecraftforge.fml.relauncher.Side;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Arrays;
+
+@Mixin(value = FMLModContainer.class,remap = false)
+public abstract class MixinModContainer {
+    @Shadow public abstract String getModId();
+
+    @Inject(method = "shouldLoadInEnvironment",at = @At("HEAD"),cancellable = true)
+    private void setDisabled(CallbackInfoReturnable<Boolean> cir){
+        Side side = FMLCommonHandler.instance().getSide();
+        if(getModId().equals("jei")){
+            cir.setReturnValue(false);
+        }
+        if(side==Side.CLIENT){
+            if(Arrays.asList(ConfigManager.config.blacklist_client).contains(getModId())){
+                cir.setReturnValue(false);
+            }
+        } else if (side==Side.SERVER) {
+            if(Arrays.asList(ConfigManager.config.blacklist_server).contains(getModId())){
+                cir.setReturnValue(false);
+            }
+        }
+    }
+}
