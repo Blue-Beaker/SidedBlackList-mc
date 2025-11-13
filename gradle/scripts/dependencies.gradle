@@ -46,6 +46,11 @@ dependencies {
     runtimeOnly rfg.deobf('curse.maven:ftb-utilities-forge-237102:3157548')
 
     implementation 'com.cleanroommc:configanytime:1.0'
+
+    // To test the mod
+
+    runtimeOnly rfg.deobf('libs:CustomSkinLoader_ForgeV1-14.25')
+    runtimeOnly rfg.deobf('libs:ThickFontFix-1.12.2-1.1')
     
     // Crafttweaker
     //implementation rfg.deobf("curse.maven:mtlib-253211:3308160")
